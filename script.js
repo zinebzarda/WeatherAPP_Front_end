@@ -74,7 +74,7 @@ search.addEventListener('click', () => {
          }).then(city =>{
             lat = city[0].lat;
             lon = city[0].lon;})
-            const APIUrl =`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APIKey}`;
+            const APIUrl =`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APIKey}&units=metric&lang=fr`;
          fetch(APIUrl).then(res =>{
             return res.json();
          }).then(data => {
