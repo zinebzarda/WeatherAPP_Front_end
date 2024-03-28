@@ -9,14 +9,13 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background: url(images/bg-sun.jpg);
+  background: url(images/bg-sun.jpg) top right/cover no-repeat;
 }
 .container {
   position: relative;
   width: 400px;
   height: 555px;
-  background: rgb(192, 192, 192);
+  background: rgb(162, 209, 250);
   opacity: 0.8;
   border-radius: 16px;
   padding: 20px;
