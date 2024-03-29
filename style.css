@@ -4,6 +4,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
+  color: black;
 }
 body {
   display: flex;
@@ -15,7 +16,7 @@ body {
   position: relative;
   width: 400px;
   height: 555px;
-  background: rgb(162, 209, 250);
+  background: rgb(195, 226, 253);
   opacity: 0.8;
   border-radius: 16px;
   padding: 20px;
@@ -32,6 +33,7 @@ body {
   position: absolute;
   left: 10px;
   font-size: 28px;
+  color: black;
 }
 
 .search-box > input {
@@ -94,6 +96,11 @@ margin: 20px 0 6px -30px;
     text-transform: capitalize;
 
 }
+/* .weather-box ,
+.weather-details, */
+.error{
+  visibility: hidden;
+}
 
 .weather-details{
     position: absolute;
@@ -131,4 +138,23 @@ margin: 20px 0 6px -30px;
     font-size: 14px;
     font-weight: 500;
 
+}
+.error {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  text-align: center;
+  margin-top: 110px;
+}
+
+.error img{
+  width: 65%;
+
+}
+
+.error p{
+  font-size: 22px;
+  font-weight: 500;
+  margin-top: 12px;
 }

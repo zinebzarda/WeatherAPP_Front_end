@@ -2,6 +2,7 @@ const container = document.querySelector('.container');
 const search = document.querySelector('.search-box button');
 const weatherBox = document.querySelector('.weather-box');
 const weatherDetails = document.querySelector('.weather-details');
+
 let lat =null;
 let lon =null;
 
@@ -57,63 +58,72 @@ let lon =null;
 
 
 
-
 search.addEventListener('click', () => {
-
    const APIKey = '505eea31e63a0c9c87201ced6a4c824d';
    const city = document.querySelector('.search-box input').value;
    const urlCity = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${APIKey}`;
 
-   if (city == '')
-      return;
+   if (city == '') return;
 
-   // fetch(urlCity).then(res => res.json()).then(data => {
+   fetch(urlCity)
+      .then(res => res.json())
+      .then(cityData => {
 
-       fetch(urlCity).then(res => {
-            return res.json();
-         }).then(city =>{
-            lat = city[0].lat;
-            lon = city[0].lon;})
-            const APIUrl =`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APIKey}&units=metric&lang=fr`;
-         fetch(APIUrl).then(res =>{
-            return res.json();
-         }).then(data => {
-            // console.log(data);
         
+         const firstCity = cityData[0];
+         lat = firstCity.lat;
+         lon = firstCity.lon;
 
-      const image = document.querySelector('.weather-box img');
-      const temperature = document.querySelector('.weather-box .temperature');
-      const description = document.querySelector('.weather-box .description');
-      const humidity = document.querySelector('.weather-details .humidity span');
-      const wind = document.querySelector('.weather-details .wind span');
+         const APIUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APIKey}&units=metric&lang=fr`;
 
+         return fetch(APIUrl);
+      })
+      .then(res => res.json())
+      .then(data => {
+       
+         if(data.cod == 404){
+           error404.classList.add('active')
+            
+         }
 
+         const image = document.querySelector('.weather-box img');
+         const temperature = document.querySelector('.weather-box .temperature');
+         const description = document.querySelector('.weather-box .description');
+         const humidity = document.querySelector('.weather-details .humidity span');
+         const wind = document.querySelector('.weather-details .wind span');
+         const bg = document.querySelector('body');
+         console.log(data);
+         switch (data.weather[0].main) {
+            case 'Clear':
+               image.src = 'images/clear.png';
+               bg.style.background = 'url("images/bg-sun.jpg")';
+               break;
+            case 'Rain':
+               image.src = 'images/rain.png';
+               bg.style.background = 'url("images/bg-rain.jpg") ';
+               break;
+            case 'Snow':
+               image.src = 'images/snow.png';
+               bg.style.background = 'url("images/bg-snow.jpg") ';
+               break;
+            case 'Clouds':
+               image.src = 'images/cloud.png';
+               bg.style.background = 'url("images/bg-cloud.jpg") ';
+               break;
+            case 'Mist':
+            case 'Haze':
+               image.src = 'images/mist.png';
+               bg.style.background = 'url("images/bg-mist.jpg") ';
+               break;
+            default:
+               image.src = 'images/cloud.png';
+               bg.style.background = 'none';
+         }
 
-      switch (data.weather[0].main) {
-         case 'Clear':
-            image.src = 'images/clear.png';
-            break;
-         case 'Rain':
-            image.src = 'images/rain.png';
-            break;
-         case 'Snow':
-            image.src = 'images/snow.png';
-            break;
-         case 'Clouds':
-            image.src = 'images/cloud.png';
-            break;
-         case 'Mist':
-            image.src = 'images/mist.png';
-            break;
-         case 'Haze':
-            image.src = 'images/mist.png';
-            break;
-         default:
-            image.src = 'images/cloud.png'
-      }
-      temperature.innerHTML = `${parseInt(data.main.temp)} <span>°C</span>`;
-      description.innerHTML = `${parseInt(data.weather[0].description)}`;
-      humidity.innerHTML = `${parseInt(data.main.humidity)}`
-      wind.innerHTML = `${parseInt(data.wind.speed)} Km/h`
-   });
+         temperature.innerHTML = `${parseInt(data.main.temp)} <span>°C</span>`;
+         description.innerHTML = `${data.weather[0].description}`;
+         humidity.innerHTML = `${parseInt(data.main.humidity)}%`;
+         wind.innerHTML = `${parseInt(data.wind.speed)} Km/h`;
+      })
+      
 });
