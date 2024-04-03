@@ -8,19 +8,37 @@
 }
 body {
   display: flex;
-  justify-content: center;
+  justify-content:center;
   align-items: center;
   background: url(images/bg-sun.jpg) top right/cover no-repeat;
+}
+.icon-section{
+  position: relative;
+}
+.icon-section img {
+  position:absolute;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  bottom: 207px;
+  left: 60px;
+  /* max-height: 120px; */
+  /* margin-bottom: 30px; */
+}
+.icon-section h1{
+  position: relative;
+  top: 150px;
+  left: 80px;
 }
 .container {
   position: relative;
   width: 400px;
   height: 555px;
-  background: rgb(195, 226, 253);
-  opacity: 0.8;
+  background: rgb(241, 241, 241);
+  opacity: 0.6;
   border-radius: 16px;
   padding: 20px;
-  color: #fff;
+  color: #000000;
 }
 .search-box {
   position: relative;
@@ -42,16 +60,16 @@ body {
   height: 100%;
   background: transparent;
   border: 2px solid rgb(255, 255, 255, 0.2);
-  outline: none;
+  /* outline: none; */
   border-radius: 10px;
   font-size: 22px;
-  color: white;
+  color: rgb(0, 0, 0);
   font-weight: 500;
-  text-transform: uppercase;
+  text-transform:none;
   padding: 0 48px 0 42px;
 }
 .search-box input::placeholder {
-  color: #fff;
+  color: #000000;
   text-transform: capitalize;
 }
 .search-box button {
@@ -63,7 +81,7 @@ body {
   border: none;
   outline: none;
   font-size: 28px;
-  color: #fff;
+  color: #000000;
   padding: 0 40px 0 5px;
   cursor: pointer;
 }
